@@ -26,3 +26,30 @@ React - Redux will be used as a framework for this application.
 # Checklist of function
 
 # Deployment
+Steps to build project
+
+**Step 1** Packaging project to war file
+```$xslt
+cd carousell-code-challenge
+mvn clean install
+```
+
+**Step 2** Copy war file to docker
+```$xslt
+cp target/carousell-code-challenge-0.0.1-SNAPSHOT docker/carousell-code-challenge-0.0.1-SNAPSHOT
+```
+
+**Step 3** Build docker image
+```$xslt
+docker build -t carousell-code-challenge .
+docker run -p 8080:8080 -it put_image_id_here
+```
+
+**Step 4** To publish docker to AWS ECS
+```$xslt
+aws ecr get-login --region ap-southeast-1
+docker login //Add output of above command here
+docker tag carousell-code-challenge:latest 201979099574.dkr.ecr.ap-southeast-1.amazonaws.com/carousell-code-challenge:latest
+docker push 201979099574.dkr.ecr.ap-southeast-1.amazonaws.com/carousell-code-challenge:latest
+```
+Link to application: http://ec2-54-179-177-247.ap-southeast-1.compute.amazonaws.com:8080/carousell-code-challenge/#/?_k=4n68tr
