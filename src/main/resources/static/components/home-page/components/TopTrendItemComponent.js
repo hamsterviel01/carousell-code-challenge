@@ -14,8 +14,8 @@ class TopTrendItemComponent extends React.Component {
                 <div>
                     213 upvotes - 30 downvotes
                 </div>
-                <button className="button-sucess">Upvote</button>
-                <button className="button-warning">Downvote</button>
+                <button className="accept">Upvote</button>
+                <button className="reject">Downvote</button>
             </div>
         );
     }

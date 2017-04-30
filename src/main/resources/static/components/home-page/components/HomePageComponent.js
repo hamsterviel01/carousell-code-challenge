@@ -6,16 +6,20 @@ import { withRouter } from 'react-router'
 import CreateNewPostContainer from '../containers/CreateNewPostContainer'
 import TopTrendListContainer from '../containers/TopTrendListContainer'
 
-require('react-flexgrid/less/flexgrid.less');
+const { Grid, Row, Col } = require('react-flexgrid');
 
 class HomePageComponent extends React.Component {
     render() {
         return (
-            <div>
-                <h1>Welcome to Carousell's Reddit Clone</h1>
-                <CreateNewPostContainer />
-                <TopTrendListContainer />
-            </div>
+            <Grid>
+                <Row>
+                    <Col lgOffset={4} lg={4}>
+                        <h1>Welcome to Carousell's Reddit Clone</h1>
+                        <CreateNewPostContainer />
+                        <TopTrendListContainer />
+                    </Col>
+                </Row>
+            </Grid>
         )
     }
 }

@@ -10,6 +10,7 @@ class TopTrendListComponent extends React.Component {
     render() {
         return (
             <div>
+                <h2>Trending Now</h2>
                 <TopTrendItemContainer />
                 <TopTrendItemContainer />
             </div>

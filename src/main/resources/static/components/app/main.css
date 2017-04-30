@@ -1,0 +1,45 @@
+body {
+    font-family: Helvetica Neue, HelveticaNeue, Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    line-height: 1.4;
+    font-size: 14px;
+    font-style: normal;
+}
+
+button {
+    position: relative;
+    cursor: pointer;
+    height: 36px;
+    width: 72px;
+    margin-right: 16px;
+    margin-top: 9px;
+    padding: 2px;
+    text-align: center;
+    border-radius: 5px;
+    background-color: transparent;
+}
+
+textarea {
+    border: 1px solid #444;
+    height: 42px;
+    width: 100%;
+    border-radius: 5px;
+    padding: 9px;
+    margin-right: 16px;
+    margin-top:9px;
+    font-size: 14px;
+}
+
+.container {
+    width: 100%;
+}
+
+.accept {
+    color: #529ecc;
+    border: 2px solid #529ecc;
+}
+
+.reject {
+    color: #d95e40;
+    border: 2px solid #d95e40;
+}

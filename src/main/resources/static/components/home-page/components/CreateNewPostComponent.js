@@ -10,8 +10,14 @@ class CreateNewPost extends React.Component {
         return (
             <div>
                 <h2>Let post something!</h2>
-                <textarea title="What's on your mind?" className="create-new-post-text-area" placeholder="What's on your mind?"></textarea>
-                <button>Post</button>
+                <form>
+                    <p>
+                        <textarea title="What's on your mind?" className="create-new-post-text-area" placeholder="What's on your mind?"></textarea>
+                    </p>
+                    <p style={{marginTop: 0}}>
+                        <button className="accept" style={{marginTop: 0}}>Post</button>
+                    </p>
+                </form>
             </div>
         )
     }
