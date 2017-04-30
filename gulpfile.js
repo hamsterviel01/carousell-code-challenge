@@ -18,7 +18,7 @@ var componentRoot = 'src/main/resources/static/components/';
 var appEntry = componentRoot + 'app/app.js';
 
 // change it to your server target folder to enable painless live reload
-var explodedTargetDir = 'target/operation-tool-0.0.1-SNAPSHOT/dist';
+var explodedTargetDir = 'target/carousell-code-challenge-0.0.1-SNAPSHOT/dist';
 
 // this tells gulp to take the index.js file and send it to Webpack along with the config and put the resulting files in dist/
 gulp.task("webpack", function () {
@@ -76,7 +76,7 @@ gulp.task('format', function () {
 // clean generated source and downloaded lib
 gulp.task('clean', function () {
   return del([
-    'dist/**',
+    'src/main/resources/static/dist/**',
     'node_modules/**/*'
   ]);
 });

@@ -21,7 +21,9 @@ For the purpose of this challenge, you should not work on the following:
 
 # Architecture Design
 
-React - Redux will be used as a framework for this application.
+React - Redux will be used as a framework for this application front-end.
+Back-end will be deployed with Spring MVC.
+
 
 # Checklist of function
 
