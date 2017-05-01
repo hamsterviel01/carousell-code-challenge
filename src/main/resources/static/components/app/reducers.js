@@ -5,21 +5,14 @@ import { combineReducers } from 'redux-immutable';
 import Immutable from 'immutable';
 
 const initialState = Immutable.fromJS({
-    uploadFlow: {
-        uploadedFile: '',
-        uploadErrorMsg: ''
-    },
-    uploadScript: {
-        xmlDescFile: '',
-        handlersFile: '',
-        tasksFile: '',
-        defaultsFile: '',
-        templatesFile: '',
-        filesFile: '',
-        metaFile: '',
-        uploadStatus: '',
-        uploadErrorMsg: ''
-    }
+    top20Posts: [
+        {
+            id: 123,
+            content: 'abc',
+            upvote: 12,
+            downvote: 10
+        }
+    ]
 });
 
 const reducer = (state = initialState, action) => {
@@ -33,6 +26,5 @@ const reducer = (state = initialState, action) => {
 
 
 export default combineReducers({
-    // auth: authReducer,
     app: reducer
 });

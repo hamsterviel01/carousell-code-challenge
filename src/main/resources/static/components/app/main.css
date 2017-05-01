@@ -6,19 +6,6 @@ body {
     font-style: normal;
 }
 
-button {
-    position: relative;
-    cursor: pointer;
-    height: 36px;
-    width: 72px;
-    margin-right: 16px;
-    margin-top: 9px;
-    padding: 2px;
-    text-align: center;
-    border-radius: 5px;
-    background-color: transparent;
-}
-
 textarea {
     border: 1px solid #444;
     height: 42px;
@@ -34,6 +21,22 @@ textarea {
     width: 100%;
 }
 
+button {
+    display: inline;
+    cursor: pointer;
+    margin-right: 16px;
+    margin-top: 9px;
+    padding: 7px 13px;
+    text-align: center;
+    border-radius: 5px;
+    background-color: transparent;
+}
+
+.button:active {
+    vertical-align: top;
+    padding: 6px 13px 8px;
+}
+
 .accept {
     color: #529ecc;
     border: 2px solid #529ecc;
@@ -42,4 +45,8 @@ textarea {
 .reject {
     color: #d95e40;
     border: 2px solid #d95e40;
+}
+
+.reject:active {
+    padding: 8px 13px 6px;
 }

@@ -7,15 +7,28 @@ import TopTrendItemContainer from '../containers/TopTrendItemContainer'
 require('react-flexgrid/less/flexgrid.less');
 
 class TopTrendItemComponent extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleUpvote = this.handleUpvote.bind(this);
+        this.handleDownvote = this.handleDownvote.bind(this);
+    }
+
+    handleUpvote() {
+        this.props.handleUpvote(this.props.id);
+    }
+
+    handleDownvote() {
+        this.props.handleDownvote(this.props.id);
+    }
+
     render() {
         return (
             <div className="top-trend-item">
-                <p>Content of post (less than 255 words)</p>
-                <div>
-                    213 upvotes - 30 downvotes
-                </div>
-                <button className="accept">Upvote</button>
-                <button className="reject">Downvote</button>
+                <p>{this.props.content}</p>
+                <p>
+                    <button className="button accept" onClick={() => this.handleUpvote()}>{this.props.upvote} {this.props.upvote > 1 ? 'upvotes' : 'upvote'}</button>
+                    <button className="button reject" onClick={() => this.handleDownvote()}>{this.props.downvote} {this.props.downvote > 1 ? 'downvotes' : 'downvote'}</button>
+                </p>
             </div>
         );
     }

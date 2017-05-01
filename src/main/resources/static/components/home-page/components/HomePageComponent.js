@@ -14,7 +14,7 @@ class HomePageComponent extends React.Component {
             <Grid>
                 <Row>
                     <Col lgOffset={4} lg={4}>
-                        <h1>Welcome to Carousell's Reddit Clone</h1>
+                        <h1>Welcome to Reddit's Clone</h1>
                         <CreateNewPostContainer />
                         <TopTrendListContainer />
                     </Col>
