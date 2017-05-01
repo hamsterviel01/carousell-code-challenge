@@ -23,35 +23,21 @@ For the purpose of this challenge, you should not work on the following:
 
 React - Redux will be used as a framework for this application front-end.
 Back-end will be deployed with Spring MVC.
-
-
-# Checklist of function
+Application will be deployed using AWS ECS service
 
 # Deployment
 Steps to build project
 
-**Step 1** Packaging project to war file
+To deploy it to AWS
 ```$xslt
-cd carousell-code-challenge
-mvn clean install
+./deploy.sh
 ```
-
-**Step 2** Copy war file to docker
+To run it on local
 ```$xslt
-cp target/carousell-code-challenge-0.0.1-SNAPSHOT docker/carousell-code-challenge-0.0.1-SNAPSHOT
+mvn clean instll
+rm docker/carousell-code-challenge-0.0.1-SNAPSHOT.war
+cp target/carousell-code-challenge-0.0.1-SNAPSHOT.war docker/carousell-code-challenge-0.0.1-SNAPSHOT.war
+docker build -t carousell-code-challenge ./docker/
+docker run -p 8080:8080 -it carousell-code-challenge:latest
 ```
-
-**Step 3** Build docker image
-```$xslt
-docker build -t carousell-code-challenge .
-docker run -p 8080:8080 -it put_image_id_here
-```
-
-**Step 4** To publish docker to AWS ECS
-```$xslt
-aws ecr get-login --region ap-southeast-1
-docker login //Add output of above command here
-docker tag carousell-code-challenge:latest 201979099574.dkr.ecr.ap-southeast-1.amazonaws.com/carousell-code-challenge:latest
-docker push 201979099574.dkr.ecr.ap-southeast-1.amazonaws.com/carousell-code-challenge:latest
-```
-Link to application: http://ec2-54-179-177-247.ap-southeast-1.compute.amazonaws.com:8080/carousell-code-challenge/#/?_k=4n68tr
+Link to application http://ec2-54-255-180-156.ap-southeast-1.compute.amazonaws.com:8080/carousell-code-challenge/#/?_k=4n68tr

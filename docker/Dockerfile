@@ -1,6 +1,6 @@
 FROM ubuntu:14.04
 MAINTAINER NGUYEN TUAN ANH
-ENV APP_VERSION 0.0.1-SNAPSHOT
+ENV APP_VERSION 0.1.0-SNAPSHOT
 
 RUN apt-get update && \
     apt-get upgrade -y && \
