@@ -16,6 +16,8 @@ class CreateNewPostComponent extends React.Component {
             validationMessage: ''
         };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.onChange = this.onChange.bind(this);
+        this.onBlur = this.onBlur.bind(this);
     }
 
     handleSubmit() {
@@ -59,6 +61,14 @@ class CreateNewPostComponent extends React.Component {
         }
     }
 
+    onBlur(e) {
+        if (this.state.validationMessage === VALIDATION_MESSAGE_0_CHAR) {
+            this.setState({
+                validationMessage: ''
+            })
+        }
+    }
+
     render() {
         return (
             <div>
@@ -70,7 +80,8 @@ class CreateNewPostComponent extends React.Component {
                             className="create-new-post-text-area"
                             placeholder="What's on your mind?"
                             value={this.state.content}
-                            onChange={(e) => this.onChange(e)}>
+                            onChange={(e) => this.onChange(e)}
+                            onBlur={(e) => this.onBlur(e)}>
                         </textarea>
                     </p>
                     <p class='validation-message'
