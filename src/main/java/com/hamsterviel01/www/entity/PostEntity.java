@@ -35,6 +35,6 @@ public class PostEntity implements Comparable<PostEntity> {
 	@Override
 	public int compareTo(PostEntity o) {
 		//Sort in descending order
-		return o.getUpvote() - this.upvote;
+		return  o.getUpvote() - this.upvote;
 	}
 }

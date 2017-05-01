@@ -20,7 +20,7 @@ public class PostDao {
 	private final ArrayList<PostEntity> listOfAllPosts = new ArrayList<PostEntity>();
 
 	/**
-	 * Lock for {@link #listOfAllPosts}.
+	 * Concurrency lock for {@link #listOfAllPosts}.
 	 */
 	private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 
@@ -45,33 +45,34 @@ public class PostDao {
 
 	/**
 	 * This method looks for {@link PostEntity} item in {@link #listOfAllPosts}
-	 * that has id as specified. It will return list of top 20 posts with
-	 * highest upvote count.
+	 * that has id as specified. Then it will increment the count of upvote and
+	 * sort the list again if necessary.
 	 * 
 	 * @param id
 	 * @return List of 20 {@link PostEntity} instances with top upvote count.
 	 */
 	public List<PostEntity> upvote(String id) {
-		WriteLock writeLock = lock.writeLock();
+		int index = findPostEntityById(id);
+		int step = 1;
+		ReadLock readLock = lock.readLock();
 		try {
-			writeLock.lock();
-			int index = findPostEntityById(id);
+			readLock.lock();
 			PostEntity post = listOfAllPosts.get(index);
 			post.upvotePost();
-			if (index > 0 && post.getUpvote() > listOfAllPosts.get(index - 1).getUpvote()) {
-				swap(index, index + 1);
+			while (index - step >= 0 && post.getUpvote() > listOfAllPosts.get(index - step).getUpvote()) {
+				step++;
 			}
 		} finally {
-			writeLock.unlock();
+			readLock.unlock();
 		}
+		swap(index, index - step + 1);
 
 		return returnTop20Posts();
 	}
 
 	/**
 	 * This method looks for {@link PostEntity} item in {@link #listOfAllPosts}
-	 * that has id as specified. It will return list of top 20 posts with
-	 * highest upvote count.
+	 * that has id as specified. Then it will increment the count of downvote.
 	 * 
 	 * @param id
 	 * @return List of 20 {@link PostEntity} instances with top upvote count.
@@ -99,8 +100,11 @@ public class PostDao {
 		ReadLock readLock = lock.readLock();
 		try {
 			readLock.lock();
+			if (listOfAllPosts.size() == 0) {
+				return listOfAllPosts;
+			}
 			List<PostEntity> top20Posts = new ArrayList<PostEntity>();
-			for (int i = 0; i < 20 || i < listOfAllPosts.size(); i++) {
+			for (int i = 0; i < 20 && i < listOfAllPosts.size(); i++) {
 				top20Posts.add(listOfAllPosts.get(i));
 			}
 			return top20Posts;
@@ -110,6 +114,8 @@ public class PostDao {
 	}
 
 	private void swap(int i, int j) {
+		if (i == j)
+			return;
 		PostEntity tmp = listOfAllPosts.get(i);
 		WriteLock writeLock = lock.writeLock();
 		try {
