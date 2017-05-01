@@ -54,18 +54,18 @@ public class PostDao {
 	public List<PostEntity> upvote(String id) {
 		int index = findPostEntityById(id);
 		int step = 1;
-		ReadLock readLock = lock.readLock();
+		WriteLock writeLock = lock.writeLock();
 		try {
-			readLock.lock();
-			PostEntity post = listOfAllPosts.get(index);
-			post.upvotePost();
+			writeLock.lock();
+			PostEntity post = listOfAllPosts.get(index).upvotePost();
+			listOfAllPosts.set(index, post);
 			while (index - step >= 0 && post.getUpvote() > listOfAllPosts.get(index - step).getUpvote()) {
 				step++;
 			}
+			swap(index, index - step + 1);
 		} finally {
-			readLock.unlock();
-		}
-		swap(index, index - step + 1);
+			writeLock.unlock();
+		}	
 
 		return returnTop20Posts();
 	}
@@ -82,8 +82,8 @@ public class PostDao {
 		try {
 			writeLock.lock();
 			int index = findPostEntityById(id);
-			PostEntity post = listOfAllPosts.get(index);
-			post.downvotePost();
+			PostEntity post = listOfAllPosts.get(index).downvotePost();
+			listOfAllPosts.set(index, post);
 		} finally {
 			writeLock.unlock();
 		}
@@ -92,7 +92,9 @@ public class PostDao {
 	}
 
 	/**
-	 * This method will return list of top 20 posts with highest upvote count.
+	 * This method will return list of cloned copies of top 20 posts with
+	 * highest upvote count. Clone copies are return instead of references to
+	 * {@link #listOfAllPosts}'s items to ensure thread-safe publication.
 	 * 
 	 * @return List of 20 {@link PostEntity} instances with top upvote count.
 	 */
@@ -117,14 +119,8 @@ public class PostDao {
 		if (i == j)
 			return;
 		PostEntity tmp = listOfAllPosts.get(i);
-		WriteLock writeLock = lock.writeLock();
-		try {
-			writeLock.lock();
-			listOfAllPosts.set(i, listOfAllPosts.get(j));
-			listOfAllPosts.set(j, tmp);
-		} finally {
-			writeLock.unlock();
-		}
+		listOfAllPosts.set(i, listOfAllPosts.get(j));
+		listOfAllPosts.set(j, tmp);
 	}
 
 	private int findPostEntityById(String id) {
