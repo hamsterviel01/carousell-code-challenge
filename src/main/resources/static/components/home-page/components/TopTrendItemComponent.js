@@ -25,7 +25,7 @@ class TopTrendItemComponent extends React.Component {
         return (
             <div className="top-trend-item">
                 <p>{this.props.content}</p>
-                <p>
+                <p style={{marginTop: -15, marginBottom: 20}}>
                     <button className="button accept" onClick={() => this.handleUpvote()}>{this.props.upvote} {this.props.upvote > 1 ? 'upvotes' : 'upvote'}</button>
                     <button className="button reject" onClick={() => this.handleDownvote()}>{this.props.downvote} {this.props.downvote > 1 ? 'downvotes' : 'downvote'}</button>
                 </p>

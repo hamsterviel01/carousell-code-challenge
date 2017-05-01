@@ -18,8 +18,6 @@ export const getTop20PostsAction = () => {
 };
 
 export const createNewPostHandleSubmitAction = (content) => {
-    console.log('createNewPostHandleSubmitAction');
-    console.log(content);
     return (dispatch) => {
         return fetch(BASE_URL + 'createNewPost', {
             method: 'POST',
