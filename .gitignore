@@ -1,7 +1,10 @@
+docker/carousell-code-challenge-0.0.1-SNAPSHOT.war
+etc/
+node/
 node_modules/
 src/main/resources/static/dist/
 target/
 .idea/workspace.xml
 .idea/tasks.xml
 .classpath
-docker/carousell-code-challenge-0.0.1-SNAPSHOT.war
+.project
